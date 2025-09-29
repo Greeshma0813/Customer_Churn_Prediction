@@ -4,7 +4,7 @@ import pickle
 import os
 
 # ------------------ Paths ------------------
-MODEL_PATH = r'F:\ML_Projects\Customer_Churn_Prediction\model\model.pkl'
+MODEL_PATH = r'model/model.pkl'
 
 # ------------------ Load Model ------------------
 if not os.path.exists(MODEL_PATH):

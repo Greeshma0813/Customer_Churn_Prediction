@@ -68,7 +68,9 @@ customerID is ignored during training and prediction.
 
 Streamlit warning missing ScriptRunContext can be ignored; always run the app with:
 
-streamlit run src\streamlit_app.py
+In Windows: streamlit run src\streamlit_app.py
+
+In Mac: python3 -m streamlit run src/streamlit_app.py
 
 Author
 

@@ -8,8 +8,8 @@ import pickle
 import os
 
 # ------------------ Paths ------------------
-DATA_PATH = r'F:\ML_Projects\Customer_Churn_Prediction\data\telco_churn.csv'
-MODEL_PATH = r'F:\ML_Projects\Customer_Churn_Prediction\model\model.pkl'
+DATA_PATH = r'data/telco_churn.csv'
+MODEL_PATH = r'model/model.pkl'
 
 # Create model folder if it doesn't exist
 os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
@@ -56,3 +56,29 @@ with open(MODEL_PATH, 'wb') as f:
     pickle.dump(model_pipeline, f)
 
 print(f"Model trained and saved successfully as {MODEL_PATH}!")
+
+#Visualization
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestClassifier
+
+# Load dataset
+df = pd.read_csv(r'data/telco_churn.csv')
+
+# Drop ID column
+X = df.drop(columns=["Churn", "customerID"])
+y = df["Churn"].map({"Yes":1, "No":0})
+
+# Encode categorical variables
+X = pd.get_dummies(X, drop_first=True)
+
+# Train model
+model = RandomForestClassifier()
+model.fit(X, y)
+
+# Feature importance
+importances = pd.Series(model.feature_importances_, index=X.columns)
+importances.sort_values().plot(kind="barh", figsize=(10,6))
+plt.title("Feature Importance for Churn Prediction")
+plt.show()
